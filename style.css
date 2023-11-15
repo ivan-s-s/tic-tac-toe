@@ -75,18 +75,26 @@ body {
     color: grey;
 }
 
+.turn {
+    margin: 2rem 0;
+    font-size: 18px;
+}
+
 .game-board {
     background-color: #c3fc82;
     display: grid;
     grid-template-columns: repeat(3, 100px);
     grid-template-rows: repeat(3, 100px);
     width: 100%;
-    margin: 4rem 0 0 0;
+    margin: 1rem 0 0 0;
     padding: 2px;
     border: 2px solid rgb(117, 117, 117);
 }
 
 .field {
+    font-size: 50px;
+    color: #124d0c;
+    font-weight: 900;
     background-color: #d8fdae;
     border: 1px solid black;
     cursor: pointer;
