@@ -45,6 +45,7 @@ function GameController(
   playerTwoName = "Player 2"
 ) {
   const board = Gameboard();
+  const winnerStatus = WinnerStatus();
 
   const players = [
     {
@@ -57,7 +58,7 @@ function GameController(
       token: "O",
       value: []
     }
-  ]
+  ];
 
   let activePlayer = players[0];
   const switchPlayerTurn = () => {
@@ -78,11 +79,20 @@ function GameController(
     const playerValue = board.getBoard();
     if (playerValue[index][0].getValue().length === 0) {
       board.dropToken(index, getActivePlayer().token);
-      activePlayer.value.push(index);
+      activePlayer.value.push(+index);
 
-      switchPlayerTurn();
-      printNewRound();
+      if (checkWin(getActivePlayer().value, index)) {
+        printWinner(getActivePlayer().name);
+        winnerStatus.changeWinnerStatus();
+      } else {
+        switchPlayerTurn();
+        printNewRound();
+      } 
     }
+  }
+
+  const printWinner = (playerName) => {
+    console.log(`${playerName} WIN!!!`);
   }
 
   printNewRound();
@@ -90,8 +100,51 @@ function GameController(
   return {
     playRound,
     getActivePlayer,
-    getBoard: board.getBoard
+    getBoard: board.getBoard,
+    getWinnerStatus: winnerStatus.getWinnerStatus
   };
+}
+
+function WinnerStatus() {
+  let winner = false;
+
+  const changeWinnerStatus = () => {
+    winner = true;
+  }
+  const getWinnerStatus = () => winner;
+
+  return {
+    changeWinnerStatus,
+    getWinnerStatus
+  }
+}
+
+function checkWin(playerValues, index) {
+  const winCombanations = [
+    [0, 1, 2],
+    [3, 4, 5],
+    [6, 7, 8],
+    [0, 3, 6],
+    [1, 4, 7],
+    [2, 5, 8],
+    [0, 4, 8],
+    [2, 4, 6]
+  ];
+
+  for (let i = 0; i < winCombanations.length; i++) {
+    let someWinComb = winCombanations[i], count = 0;
+    if (someWinComb.indexOf(+index) !== -1) {
+      for (let j = 0; j < someWinComb.length; j++) {
+        if (playerValues.indexOf(someWinComb[j]) !== -1) {
+          count++;
+          if (count === 3) {
+            return true;
+          }
+        }
+      }
+    }
+    count = 0;
+  }
 }
 
 function ScreenController() {
@@ -120,11 +173,21 @@ function ScreenController() {
     })
   }
 
+  const winScreen = () => {
+    updateScreen();
+
+    const activePlayer = game.getActivePlayer();
+
+    const winnerDiv = document.getElementById('winnerPopUp');
+    winnerDiv.classList.remove('hide');
+    winnerDiv.innerHTML = `<p>${activePlayer.name} WIN!!!</p>`;
+  }
+  
   function clickHandlerButton(e) {
     const selectButton = e.target.id;
 
     game.playRound(selectButton);
-    updateScreen();
+    game.getWinnerStatus() ? winScreen() : updateScreen();
   }
 
   updateScreen();
