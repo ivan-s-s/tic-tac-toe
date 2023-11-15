@@ -2,16 +2,42 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tic-tac-toe</title>
-    <link rel="stylesheet" href="style.css">
-    <link rel="shortcut icon" href="./img/favicon.ico" type="image/x-icon">
-    <script src="script.js" defer></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tic-tac-toe</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="shortcut icon" href="./img/favicon.ico" type="image/x-icon">
+  <script src="script.js" defer></script>
 </head>
 
 <body>
+  <header>
 
+  </header>
+
+  <main>
+    <div class="title">Tic Tac Toe</div>
+    <div class="board">
+      <div class="win">
+        <p class="winner hide">The Winner is</p>
+      </div>
+
+      <div class="card">
+        <div class="item player">
+          <button class="btn btn-pick x-btn selected" onclick="changeToX()">X</button>
+          <button class="btn btn-pick o-btn not-selected" onclick="changeToO()">O</button>
+        </div>
+
+        <div class="item game-board"></div>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    Copyright &#169;
+    <script>document.write(new Date().getFullYear())</script>
+    <a href="https://github.com/ivan-s-s">&nbsp;IvanS <i class="fa-brands fa-github"></i></a>
+  </footer>
 </body>
 
 </html>
