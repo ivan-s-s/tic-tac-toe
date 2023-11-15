@@ -1,0 +1,125 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;700&display=swap');
+
+*,
+*::before,
+*::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    font-size: 62.5%;
+    min-height: 100dvh;
+    font-family: 'Open Sans', sans-serif;
+    position: relative;
+}
+
+body {
+    margin: 0;
+    background-color: #deffff;
+}
+
+.title {
+    text-align: center;
+    font-size: 7rem;
+    font-weight: 700;
+    letter-spacing: -0.2rem;
+    line-height: 1em;
+    margin: 2rem 0;
+}
+
+.board {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    width: 60%;
+    margin: auto;
+}
+
+.card {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.item.player {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.btn {
+    border-radius: 50%;
+}
+
+.btn-pick {
+    width: 3em;
+    height: 3em;
+    margin: 2em 1em 1em 1em;
+}
+
+.selected {
+    border: 2px solid black;
+    box-shadow: -1px 10px 20px -6px grey;
+    font-weight: 700;
+    color: black;
+}
+
+.not-selected {
+    border: 2px solid grey;
+    box-shadow: none;
+    font-weight: 700;
+    color: grey;
+}
+
+.game-board {
+    background-color: #c3fc82;
+    display: grid;
+    grid-template-columns: repeat(3, 100px);
+    grid-template-rows: repeat(3, 100px);
+    width: 100%;
+    margin: 4rem 0 0 0;
+    padding: 2px;
+    border: 2px solid rgb(117, 117, 117);
+}
+
+.field {
+    background-color: #d8fdae;
+    border: 1px solid black;
+    cursor: pointer;
+    width: 100%;
+    height: 100%;
+}
+
+.hide {
+    display: none;
+}
+
+footer {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    padding: 2rem 0;
+    font-size: 2rem;
+}
+
+footer>a {
+    text-decoration: none;
+    color: #fff;
+    cursor: pointer;
+}
+
+footer>a:visited {
+    color: #000000;
+}
+
+footer>a:hover {
+    color: #48bb3e;
+}
