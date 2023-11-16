@@ -21,23 +21,43 @@ body {
 }
 
 .card {
-    display: flex;
+    /* display: flex;
     justify-content: center;
     align-items: center;
-    flex-direction: column;
+    flex-direction: column; */
     position: absolute;
     width: 100%;
-    background-color: rgba(255, 255, 255, 0.5);
+    height: 100%;
+    /* background-color: rgba(255, 255, 255, 0.5); */
+    z-index: 100;
 }
 
 .item.player {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    gap: 50px;
+    flex-direction: column;
+    gap: 30px;
     width: 100%;
-    margin: 2em 0;
-    background-color: rgba(255, 255, 255, 0.5)
+    height: 100%;
+    /* margin: 2em 0; */
+    background-color: rgba(20, 114, 20, 0.4);
+    /* border-radius: 50px; */
+    /* box-shadow: 1px 1px 14px 0px rgba(224, 223, 254, 0.4) inset, 8px 8px 8px 0px rgba(0, 0, 0 ,0.4); */
+}
+
+.small-title-box {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 26px;
+}
+
+.next-title-box {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
 }
 
 .names-box {
@@ -45,38 +65,60 @@ body {
     justify-content: center;
     align-items: center;
     flex-direction: column;
+    gap: 10px;
+    font-size: 18px;
+    font-weight: 700;
 }
 
-.picks-box {
+.names-box label {
+    color: green;
+}
+
+.names-box input {
+    margin-bottom: 10px;
+    padding: 10px 15px;
+    font-size: 18px;
+    border-radius: 20px;
+    border: none;
+    box-shadow: -1px 10px 20px -6px grey;
+}
+
+.playerBox {
     display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    gap: 15px;
-}
-
-.btn {
-    border-radius: 50%;
+    justify-content: baseline;
+    gap: 20px;
 }
 
 .btn-pick {
     width: 3em;
     height: 3em;
     margin: 0;
-}
-
-.selected {
-    border: 2px solid black;
+    border: none;
+    border-radius: 20px;
     box-shadow: -1px 10px 20px -6px grey;
+    background-color: #e7e7e7;
     font-weight: 700;
     color: black;
+    cursor: pointer;
 }
 
-.not-selected {
-    border: 2px solid grey;
-    box-shadow: none;
+.start-btn {
+    align-self: center;
+    width: 220px;
+    padding: 14px 25px;
+    font-size: 28px;
     font-weight: 700;
-    color: grey;
+    font-style: italic;
+    border-radius: 20px;
+    border: 4px solid #042e04;
+    background-color: #138604;
+    color: #fff;
+    cursor: pointer;
+    box-shadow: -1px 10px 20px -6px grey;
+}
+
+.start-btn:hover {
+    background-color: #0c5003;
 }
 
 main {

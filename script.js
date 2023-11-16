@@ -42,7 +42,9 @@ function Cell() {
 
 function GameController(
   playerOneName = "Player 1",
-  playerTwoName = "Player 2"
+  playerTwoName = "Player 2",
+  playerOneToken,
+  playerTwoToken
 ) {
   const board = Gameboard();
   const winnerStatus = WinnerStatus();
@@ -50,12 +52,12 @@ function GameController(
   const players = [
     {
       name: playerOneName,
-      token: "X",
+      token: playerOneToken,
       value: []
     },
     {
       name: playerTwoName,
-      token: "O",
+      token: playerTwoToken,
       value: []
     }
   ];
@@ -147,8 +149,8 @@ function CheckWin(playerValues, index) {
   }
 }
 
-function ScreenController(playerOne, playerTwo) {
-  const game = GameController(playerOne, playerTwo);
+function ScreenController(playerOne, playerTwo, tokenOne, tokenTwo) {
+  const game = GameController(playerOne, playerTwo, tokenOne, tokenTwo);
   const playerTurnDiv = document.querySelector('.turn');
   const boardDiv = document.querySelector('.game-board');
 
@@ -193,17 +195,59 @@ function ScreenController(playerOne, playerTwo) {
   updateScreen();
 }
 
-// function StartController() {
-//   const gamePage = ScreenController();
-//   const startDiv = document.querySelector('.card');
+function StartController() {
+  const playerOneName = document.getElementById('playerOne');
+  const playerTwoName = document.getElementById('playerTwo');
 
-//   const startScreen = () => {
-//     startDiv.
-//   }
+  let currentTokenOneDiv = document.querySelector('.player-one-token');
+  let currentTokenTwoDiv = document.querySelector('.player-two-token');
 
-// }
+  const changeToken = () => {
+    let firstToken = currentTokenOneDiv.textContent;
+    let secondToken = currentTokenTwoDiv.textContent;
 
-ScreenController('Ivan', 'Nikita');
+    currentTokenOneDiv.textContent = secondToken;
+    currentTokenTwoDiv.textContent = firstToken;
+  }
+
+  const tokenButtonDivs = document.querySelectorAll('.btn-pick');
+  tokenButtonDivs.forEach((e) => e.addEventListener('click', changeToken));
+
+  const getValues = () => {
+    let firstN = playerOneName.value;
+    let secondN = playerTwoName.value;
+    if (firstN.length === 0 && secondN.length === 0) {
+      firstN = "Player 1"
+      secondN = "Player 2"
+    } else if (firstN.length === 0) {
+      firstN = "Player 1"
+    } else if (secondN.length === 0) {
+      secondN = "Player 2"
+    }
+    
+    const firstT = currentTokenOneDiv.textContent;
+    const secondT = currentTokenTwoDiv.textContent;
+
+    return { firstN, secondN, firstT, secondT }
+  };
+
+  const startDiv = document.querySelector('.card');
+  const startBoardDiv = document.querySelector('.game-board');
+
+  const startGame = () => {
+    startDiv.classList.add('hide');
+    startBoardDiv.classList.remove('hide');
+    ScreenController(getValues().firstN, getValues().secondN, getValues().firstT, getValues().secondT);
+  }
+  
+  const startButtonDiv = document.querySelectorAll('.start-btn');
+  startButtonDiv.forEach((e) => e.addEventListener('click', startGame));
+
+}
+
+StartController();
+
+// ScreenController('Ivan', 'Nikita');
 
 // function changeToX() {
 //     const xBtn = document.querySelector('.x-btn');
