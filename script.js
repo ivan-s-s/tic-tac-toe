@@ -81,7 +81,7 @@ function GameController(
       board.dropToken(index, getActivePlayer().token);
       activePlayer.value.push(+index);
 
-      if (checkWin(getActivePlayer().value, index)) {
+      if (CheckWin(getActivePlayer().value, index)) {
         printWinner(getActivePlayer().name);
         winnerStatus.changeWinnerStatus();
       } else {
@@ -119,7 +119,7 @@ function WinnerStatus() {
   }
 }
 
-function checkWin(playerValues, index) {
+function CheckWin(playerValues, index) {
   const winCombanations = [
     [0, 1, 2],
     [3, 4, 5],
@@ -147,8 +147,8 @@ function checkWin(playerValues, index) {
   }
 }
 
-function ScreenController() {
-  const game = GameController();
+function ScreenController(playerOne, playerTwo) {
+  const game = GameController(playerOne, playerTwo);
   const playerTurnDiv = document.querySelector('.turn');
   const boardDiv = document.querySelector('.game-board');
 
@@ -193,8 +193,17 @@ function ScreenController() {
   updateScreen();
 }
 
-ScreenController();
+// function StartController() {
+//   const gamePage = ScreenController();
+//   const startDiv = document.querySelector('.card');
 
+//   const startScreen = () => {
+//     startDiv.
+//   }
+
+// }
+
+ScreenController('Ivan', 'Nikita');
 
 // function changeToX() {
 //     const xBtn = document.querySelector('.x-btn');

@@ -12,24 +12,28 @@
 
 <body>
   <header>
-    <div id="winnerPopUp" class="win hide">
+    <div class="card">
+      <div class="item player">
+        <div class="names-box">
+          <label for="playerOne">Player 1</label>
+          <input type="text" name="playerOne" id="playerOne">
+          <label for="playerTwo">Player 2</label>
+          <input type="text" name="playerTwo" id="playerTwo">
+        </div>
+        <div class="picks-box">
+          <button class="btn btn-pick x-btn selected" onclick="changeToX()">X</button>
+          <button class="btn btn-pick o-btn not-selected" onclick="changeToO()">O</button>
+        </div>
       </div>
+    </div>
+    <div id="winnerPopUp" class="win hide"></div>
   </header>
 
   <main>
     <div class="title">Tic Tac Toe</div>
     <div class="board">
-      
-
-      <div class="card">
-        <div class="item player">
-          <button class="btn btn-pick x-btn selected" onclick="changeToX()">X</button>
-          <button class="btn btn-pick o-btn not-selected" onclick="changeToO()">O</button>
-        </div>
-
         <div class="turn"></div>
         <div class="item game-board"></div>
-      </div>
     </div>
   </main>
 

@@ -20,41 +20,39 @@ body {
     background-color: #deffff;
 }
 
-main {
-    margin: 0;
-    padding: 2rem 0;
-}
-
-.title {
-    text-align: center;
-    font-size: 7rem;
-    font-weight: 700;
-    letter-spacing: -0.2rem;
-    line-height: 1em;
-    /* margin: 2rem 0; */
-}
-
-.board {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    width: 100%;
-    margin: auto;
-    position: relative;
-}
-
 .card {
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
+    position: absolute;
+    width: 100%;
+    background-color: rgba(255, 255, 255, 0.5);
 }
 
 .item.player {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
+    gap: 50px;
+    width: 100%;
+    margin: 2em 0;
+    background-color: rgba(255, 255, 255, 0.5)
+}
+
+.names-box {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.picks-box {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 15px;
 }
 
 .btn {
@@ -64,7 +62,7 @@ main {
 .btn-pick {
     width: 3em;
     height: 3em;
-    margin: 2em 1em 1em 1em;
+    margin: 0;
 }
 
 .selected {
@@ -81,9 +79,33 @@ main {
     color: grey;
 }
 
+main {
+    margin: 0;
+    padding: 7rem 0;
+    height: 100dvh;
+}
+
+.title {
+    text-align: center;
+    font-size: 7rem;
+    font-weight: 700;
+    letter-spacing: -0.2rem;
+    line-height: 1em;
+}
+
+.board {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    width: 100%;
+    margin: auto;
+    position: relative;
+}
+
 .turn {
     margin: 2rem 0;
-    font-size: 18px;
+    font-size: 22px;
 }
 
 .game-board {
@@ -91,8 +113,6 @@ main {
     display: grid;
     grid-template-columns: repeat(3, 100px);
     grid-template-rows: repeat(3, 100px);
-    width: 100%;
-    margin: 1rem 0 0 0;
     padding: 2px;
     border: 2px solid rgb(117, 117, 117);
 }
