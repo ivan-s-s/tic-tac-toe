@@ -16,15 +16,14 @@ function Gameboard() {
     board[index][0].addToken(player);
   }
 
-  const printBoard = () => {
-    const boardWithCellValues = board.map((e) => e.map((cell) => cell.getValue()));
-    console.log(boardWithCellValues);
+  const clearBoard = () => {
+    board.forEach((e) => e.map((cell) => cell.clearValue()));
   }
 
   return {
     getBoard,
     dropToken,
-    printBoard
+    clearBoard
   }
 }
 
@@ -34,9 +33,13 @@ function Cell() {
     value = player;
   }
   const getValue = () => value;
+  const clearValue = () => {
+    value = '';
+  }
   return {
     addToken,
-    getValue
+    getValue,
+    clearValue
   }
 }
 
@@ -69,41 +72,37 @@ function GameController(
 
   const getActivePlayer = () => activePlayer;
 
-  const printNewRound = () => {
-    board.printBoard();
-    console.log(`${getActivePlayer().name}'s turn.`);
+  const clearPlayersValue = () => {
+    players.forEach((e) => e.value = []);
   }
 
   const playRound = (index) => {
-    console.log(
-      `Dropping ${getActivePlayer().name}'s token into: ${index}`
-    );
     const playerValue = board.getBoard();
     if (playerValue[index][0].getValue().length === 0) {
       board.dropToken(index, getActivePlayer().token);
       activePlayer.value.push(+index);
 
       if (CheckWin(getActivePlayer().value, index)) {
-        printWinner(getActivePlayer().name);
         winnerStatus.changeWinnerStatus();
       } else {
         switchPlayerTurn();
-        printNewRound();
       } 
     }
   }
 
-  const printWinner = (playerName) => {
-    console.log(`${playerName} WIN!!!`);
+  const restartGame = () => {
+    board.clearBoard();
+    clearPlayersValue();
+    activePlayer = players[0];
   }
-
-  printNewRound();
 
   return {
     playRound,
     getActivePlayer,
     getBoard: board.getBoard,
-    getWinnerStatus: winnerStatus.getWinnerStatus
+    getWinnerStatus: winnerStatus.getWinnerStatus,
+    restartGame,
+    restartWinnerStatus: winnerStatus.restartWinnerStatus
   };
 }
 
@@ -113,10 +112,14 @@ function WinnerStatus() {
   const changeWinnerStatus = () => {
     winner = true;
   }
+  const restartWinnerStatus = () => {
+    winner = false;
+  }
   const getWinnerStatus = () => winner;
 
   return {
     changeWinnerStatus,
+    restartWinnerStatus,
     getWinnerStatus
   }
 }
@@ -153,8 +156,10 @@ function ScreenController(playerOne, playerTwo, tokenOne, tokenTwo) {
   const game = GameController(playerOne, playerTwo, tokenOne, tokenTwo);
   const playerTurnDiv = document.querySelector('.turn');
   const boardDiv = document.querySelector('.game-board');
+  const restartDiv = document.querySelector('.restart-btn');
 
   const updateScreen = () => {
+    restartDiv.addEventListener('click', clickRestartButton);
     boardDiv.textContent = "";
 
     const board = game.getBoard();
@@ -175,6 +180,19 @@ function ScreenController(playerOne, playerTwo, tokenOne, tokenTwo) {
     })
   }
 
+  const clickRestartButton = () => {
+    game.restartGame();
+    updateScreen();
+  }
+
+  const clickWinRestartButton = () => {
+    clickRestartButton();
+
+    const winnerDiv = document.getElementById('winnerPopUp');
+    game.restartWinnerStatus();
+    winnerDiv.classList.add('hide');
+  }
+
   const winScreen = () => {
     updateScreen();
 
@@ -182,7 +200,10 @@ function ScreenController(playerOne, playerTwo, tokenOne, tokenTwo) {
 
     const winnerDiv = document.getElementById('winnerPopUp');
     winnerDiv.classList.remove('hide');
-    winnerDiv.innerHTML = `<p>${activePlayer.name} WIN!!!</p>`;
+    winnerDiv.innerHTML = `<p>${activePlayer.name} WIN!!!</p><button class="win-restart-btn">Еще раз</button>`;
+
+    const restartWinDiv = document.querySelector('.win-restart-btn');
+    restartWinDiv.addEventListener('click', clickWinRestartButton);
   }
   
   function clickHandlerButton(e) {
@@ -232,7 +253,7 @@ function StartController() {
   };
 
   const startDiv = document.querySelector('.card');
-  const startBoardDiv = document.querySelector('.game-board');
+  const startBoardDiv = document.querySelector('.board');
 
   const startGame = () => {
     startDiv.classList.add('hide');

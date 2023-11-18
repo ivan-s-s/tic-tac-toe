@@ -7,6 +7,7 @@
   <title>Tic-tac-toe</title>
   <link rel="stylesheet" href="style.css">
   <link rel="shortcut icon" href="./img/favicon.ico" type="image/x-icon">
+  <script src="https://kit.fontawesome.com/14eb71cf09.js" crossorigin="anonymous"></script>
   <script src="script.js" defer></script>
 </head>
 
@@ -31,16 +32,15 @@
         <button class="start-btn">Start Game</button>
       </div>
     </div>
-    <div id="winnerPopUp" class="win hide">
-      <button class="start-btn">Start Game</button>
-    </div>
+    <div id="winnerPopUp" class="win hide"></div>
   </header>
 
   <main>
     <div class="title">Tic Tac Toe</div>
-    <div class="board">
-        <div class="turn"></div>
-        <div class="item game-board hide"></div>
+    <div class="board hide">
+      <div class="turn"></div>
+      <div class="item game-board"></div>
+      <button class="restart-btn"><i class="fa-solid fa-arrow-rotate-left"></i></button>
     </div>
   </main>
 
