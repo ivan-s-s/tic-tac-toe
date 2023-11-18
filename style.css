@@ -41,7 +41,7 @@ body {
     width: 100%;
     height: 100%;
     /* margin: 2em 0; */
-    background-color: rgba(20, 114, 20, 0.4);
+    background-color: rgba(5, 135, 96, 0.4);
     /* border-radius: 50px; */
     /* box-shadow: 1px 1px 14px 0px rgba(224, 223, 254, 0.4) inset, 8px 8px 8px 0px rgba(0, 0, 0 ,0.4); */
 }
@@ -102,7 +102,8 @@ body {
     cursor: pointer;
 }
 
-.start-btn {
+.start-btn,
+.win-restart-btn {
     align-self: center;
     width: 220px;
     padding: 14px 25px;
@@ -111,13 +112,14 @@ body {
     font-style: italic;
     border-radius: 20px;
     border: 4px solid #042e04;
-    background-color: #138604;
+    background-color: #04865f;
     color: #fff;
     cursor: pointer;
     box-shadow: -1px 10px 20px -6px grey;
 }
 
-.start-btn:hover {
+.start-btn:hover,
+.win-restart-btn:hover {
     background-color: #0c5003;
 }
 
@@ -157,6 +159,25 @@ main {
     grid-template-rows: repeat(3, 100px);
     padding: 2px;
     border: 2px solid rgb(117, 117, 117);
+    margin-bottom: 20px;
+}
+
+.restart-btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 40px;
+    height: 40px;
+    font-size: 24px;
+    border: 1px solid rgba(0, 0, 0, 0.4);
+    border-radius: 50%;
+    cursor: pointer;
+    background-color: #e7e7e7;
+    color: #042e04;
+}
+
+.restart-btn:hover {
+    background-color: #cecece;
 }
 
 .field {
@@ -175,6 +196,7 @@ main {
     display: flex;
     justify-content: center;
     align-items: center;
+    flex-direction: column;
     width: 100%;
     height: 100dvh;
     background-color: rgba(20, 114, 20, 0.2);
@@ -183,6 +205,10 @@ main {
 
 .win p {
     font-size: 7em;
+}
+
+.win-restart-btn {
+    margin-top: 50px;
 }
 
 .hide {
