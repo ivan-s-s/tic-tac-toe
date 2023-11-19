@@ -65,6 +65,9 @@ function GameController(
     }
   ];
 
+  let valuesLength = 0;
+  const getValuesLength = () => valuesLength;
+
   let activePlayer = players[0];
   const switchPlayerTurn = () => {
     activePlayer = activePlayer === players[0] ? players[1] : players[0];
@@ -81,6 +84,9 @@ function GameController(
     if (playerValue[index][0].getValue().length === 0) {
       board.dropToken(index, getActivePlayer().token);
       activePlayer.value.push(+index);
+      
+      valuesLength = 0;
+      players.forEach((e) => valuesLength += e.value.length);
 
       if (CheckWin(getActivePlayer().value, index)) {
         winnerStatus.changeWinnerStatus();
@@ -102,7 +108,8 @@ function GameController(
     getBoard: board.getBoard,
     getWinnerStatus: winnerStatus.getWinnerStatus,
     restartGame,
-    restartWinnerStatus: winnerStatus.restartWinnerStatus
+    restartWinnerStatus: winnerStatus.restartWinnerStatus,
+    getValuesLength
   };
 }
 
@@ -205,12 +212,27 @@ function ScreenController(playerOne, playerTwo, tokenOne, tokenTwo) {
     const restartWinDiv = document.querySelector('.win-restart-btn');
     restartWinDiv.addEventListener('click', clickWinRestartButton);
   }
+
+  const tieScreen = () => {
+    updateScreen();
+
+    const winnerDiv = document.getElementById('winnerPopUp');
+    winnerDiv.classList.remove('hide');
+    winnerDiv.innerHTML = `<p>Draw!</p><button class="win-restart-btn">Еще раз</button>`;
+
+    const restartWinDiv = document.querySelector('.win-restart-btn');
+    restartWinDiv.addEventListener('click', clickWinRestartButton);
+  }
   
   function clickHandlerButton(e) {
     const selectButton = e.target.id;
 
     game.playRound(selectButton);
-    game.getWinnerStatus() ? winScreen() : updateScreen();
+    if (game.getWinnerStatus()) {
+      winScreen();
+    } else {
+      game.getValuesLength() === 9 ? tieScreen() : updateScreen();
+    }
   }
 
   updateScreen();
@@ -267,25 +289,3 @@ function StartController() {
 }
 
 StartController();
-
-// ScreenController('Ivan', 'Nikita');
-
-// function changeToX() {
-//     const xBtn = document.querySelector('.x-btn');
-//     const oBtn = document.querySelector('.o-btn');
-
-//     xBtn.classList.add('selected');
-//     oBtn.classList.remove('selected');
-//     xBtn.classList.remove('not-selected');
-//     oBtn.classList.add('not-selected');
-// }
-
-// function changeToO() {
-//     const xBtn = document.querySelector('.x-btn');
-//     const oBtn = document.querySelector('.o-btn');
-
-//     oBtn.classList.add('selected');
-//     xBtn.classList.remove('selected');
-//     oBtn.classList.remove('not-selected');
-//     xBtn.classList.add('not-selected');
-// }
